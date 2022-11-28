@@ -1,0 +1,140 @@
+.employee-tab{
+    width: fit-content;
+    border: 1px solid #ededed;
+    border-bottom: transparent;
+    border-top-right-radius: 5px;
+    padding: 10px 30px;
+    background-color: #f5f5f5;
+    color: #9b9b9b;
+}
+.employee-tab.active{
+    color: #183153;
+    background-color: white;
+    position: relative;
+}
+.employee-tab.active::before{
+    position: absolute;
+    content: "";
+    width: 101%;
+    height: 100%;
+    background-color: transparent;
+    top: -1px;
+    right: -1px;
+    border-top: 3px solid #183153;
+    border-top-right-radius: 5px;
+}
+.employee-container{
+    display: flex;
+    border: 1px solid #ededed;
+    border-radius: 5px;
+    position: relative;
+    padding: 40px 30px;
+    gap: 40px;
+    background-color: white;
+}
+
+button{
+    width: 65px;
+    margin: 0;
+    font-size: 13px;
+    height: 35px;
+    border: 1px solid #183153;
+    background-color: white;
+    color: #183153;
+    font-weight: 700;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .3s;
+}
+button:hover{
+    border:none;
+    background-color: #183153;
+    color: white;
+}
+/*
+.list fa-icon{
+    padding-left: 10px;
+    color: #183153;
+    font-size: 18px;
+    transition: .3s;
+}
+*/
+
+button:hover fa-icon{
+    color:white;
+}
+.list{
+    overflow-x: auto;
+    width: 100%;
+}
+
+
+a{
+    text-decoration: none;
+    color: #183153;
+}
+button:hover a {
+    color: white;
+}
+.filter-title{
+    font-size: 14px;
+}
+.filter-content{
+    font-size: 13px;
+}
+
+
+.req-status{
+    display: flex;
+    gap: 15px;
+    border-bottom: 1px solid #dddddda8;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+.req-status::-webkit-scrollbar{
+    height: 5px;
+}
+.req-status::-webkit-scrollbar-track{
+    background-color: #f1f1f1;
+}
+
+.req-status::-webkit-scrollbar-thumb{
+    background-color: #c1c1c1;
+    border-radius: 5px;
+}
+.req-status p,.req-status label{
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 0;
+    padding-bottom: 10px;
+    cursor: pointer;
+    position: relative;
+    color: #adadad;
+    transition: .3s;
+}
+.req-status p::after,.req-status label::after{
+    position: absolute;
+    content: "";
+    height: 4px;
+    width: 100%;
+    background-color: #183153;
+    right: 0;
+    bottom: -2px;
+    transition: .3s;
+    opacity: 0;
+}
+.req-status p:hover, .req-status p.active,
+.req-status label:hover, .req-status label.active{
+    color:#183153;
+}
+.req-status p:hover::after, .req-status p.active::after,
+.req-status label:hover::after, .req-status label.active::after{
+    opacity: 1;
+}
+input[type="radio"]{
+    -webkit-appearance: none;
+    appearance: none;
+}
+

@@ -1,0 +1,22 @@
+
+<!--<a style=" margin-top: 20px;" routerLink="/employee/request">
+    <fa-icon class="newReq-btn" [icon]="faPlusCircle"></fa-icon>
+</a>-->
+<div (click)="checkHasCustody(1111)">
+    <fa-icon class="newReq-btn" [icon]="faPlusCircle"></fa-icon>
+</div>
+<div id="k" class="modal-backdrop fade show"></div>          
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeDialogBox()"></button>
+                            <div class="modal-header">           
+                                <fa-icon class="warning-box" [icon]="faExclamation"></fa-icon>
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">لديك طلب غير مكتمل!</h1>
+                            </div>
+                            <div class="modal-body">
+                                لا يمكنك طلب عهدة جديدة في  حال وجود طلب غير مكتمل.
+                            </div>
+                        </div>
+                    </div>
+                </div>

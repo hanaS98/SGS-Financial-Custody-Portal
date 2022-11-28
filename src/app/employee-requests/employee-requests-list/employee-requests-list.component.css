@@ -1,0 +1,257 @@
+.outer-div{
+    display: flex;
+    flex-direction: column;
+}
+.employeeList{
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    padding: 5px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.employeeList .empLst-st-id{
+    display: flex;
+    align-items: center;
+    text-align: right;
+}
+
+.employeeList .empLst-oth{
+    display: flex;
+    gap:5px;
+}
+.employeeList p{
+    margin: 0;
+}
+.outer-div.list-info{
+    background-color: white;
+    border: 1px solid #dddddda8;
+    padding: 25px 25px 0 20px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    position: relative;
+    transition: .3s;
+}
+.outer-div.list-info:hover{
+    box-shadow: 0 3px 5px 0 #ccc;
+    bottom:1px;    
+}
+.pHeader{
+    font-size: 11px;
+    color: #adadad;
+}
+.empLst-st-id .statusAcc{
+    background-color: #18cca2;   
+}
+.empLst-st-id .statusRej{
+    background-color: #ff7d74;   
+}
+.empLst-st-id .statusPen{
+    background-color: #ffcb2f;   
+}
+.empLst-st-id .statusNew{
+    background-color: #36c2ff;   
+}
+.empLst-st-id .statusIncomplate{
+    background-color:#607d8b;
+}
+.empLst-st-id .statusExpired{
+    background-color: black;
+}
+.empLst-st-id .statusNew::before, .statusPen::before,
+ .statusRej::before, .statusAcc::before,
+ .statusIncomplate::before, .statusExpired::before{
+    position: absolute;
+    content: "";
+    background-color: inherit;
+    height: 100%;
+    width: 2px;
+    right: 0;
+    top: 0;
+    border-radius: 0 5px 5px 0;
+}
+@media (max-width: 1200px){
+    .empLst-st-id .statusNew::before, .statusPen::before,
+     .statusRej::before, .statusAcc::before,
+     .statusIncomplate::before, .statusExpired::before{
+        width: 3px;
+    }
+}
+.employeeList .delete-button,.update-btn{
+    background-color: transparent;
+    border:none;
+    border-radius: 0;
+    margin: 0;
+    position: relative;
+}
+.employeeList .delete-button::after,.update-btn::after{
+    content: attr(describtion);
+    position: absolute;
+    width: 50px;
+    bottom: -22px;
+    background-color: #adadad;
+    color: white;
+    font-weight: normal;
+    font-size: 11px;
+    border-radius: 5px;
+    padding: 5px 10px;
+    opacity: 0;
+    transition: .3s;
+}
+.employeeList .delete-button:hover::after,.update-btn:hover::after{
+    opacity: 1;
+}
+.employeeList .delete-button:hover fa-icon,.update-btn:hover fa-icon{
+    color:#214577;
+}
+.delete-button,.update-btn{
+    color: #183153;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .3s;
+}
+a{
+    text-decoration: none;
+    color: #183153;
+}
+.delete-button:hover a,.update-btn:hover a {
+    color: white;
+}
+
+.cost-component{
+    display: flex;
+    gap:50%;
+    border: 1px solid #e9e9e9;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 90%;
+}
+.cost-component div p{
+    margin-bottom: 5px;
+}
+.cust-Id{
+    width: 70px;
+}
+.cust-date{
+    padding-right: 20px;
+}
+.cust-proName{
+    padding-right: 40px;
+}
+.more-details{
+    display: flex;
+}
+.cust-cost{
+    padding-right: 118px;
+    width: 90%;
+}
+.cust-phoneNum,.cust-purpose{
+    padding-right: 34px;
+}
+
+/*iPads, Tablets,Mobile devices*/
+@media (min-width: 320px) and (max-width: 768px) {
+    .employeeList{
+        align-items: flex-start;
+    }
+    .employeeList .empLst-st-id{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .cust-date,.cust-proName,.cust-cost,.cust-phoneNum,.cust-purpose{
+        padding-right: 0;
+    }
+    .more-details{
+        flex-direction: column;
+    }
+    .cost-component{
+        flex-direction:  column;
+    }
+    .traking-list{
+        flex-direction: column;
+        padding-top: 0;
+    }
+    .traking-list li{
+        padding-bottom: 30px;
+        padding-right: 25px;
+    }
+    .traking-list li::before{
+        top:0;
+        right: 0;
+    }
+    .traking-list li::after{
+        width: 5px;
+        height: 50px;
+        top: 0;
+        right: 5px;
+    }
+}
+.modal-header{
+    flex-direction: column;
+    border-bottom: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 10px;
+}
+.btn-close{
+    margin: 10px 15px 0;
+    border: none;
+    width: fit-content;
+}
+.confirm-delete-icon{
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: white;
+    background-color: #f9716b;
+    box-shadow: 0 0 20px 0 #ff918c;
+}
+.modal-title.fs-5{
+    margin-top: 30px;
+    color: black;
+}
+.modal-body{
+    color: #8c8c8c;
+    text-align: center;
+    padding: 0;
+    font-size: 14px;
+}
+.modal-footer{
+    border-top: 0;
+    margin-top: 15px;
+    justify-content: center;
+    margin-bottom: 28px;
+}
+.confirm-btn{
+    width: 100px;
+    border: none;
+    color: white;
+    font-weight: normal;
+}
+.confirm-btn.close{
+    background-color: #6c757d;
+}
+.confirm-btn.close:hover{
+    background-color: #5c646b;
+    color: white;
+}
+.confirm-btn.save{
+    background-color: #0d6efd;
+}
+.confirm-btn.save:hover{
+    background-color: #0a56c7;
+    color: white;
+}
+.empty{
+color: red;
+}
+.outer-div.list-info.empty-box{
+    padding: 28px;
+    text-align: center;
+}

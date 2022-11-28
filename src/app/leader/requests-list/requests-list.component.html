@@ -1,0 +1,128 @@
+<div *ngFor = "let emp of allEmployee;">
+    <!--<button>{{filterText}}</button>-->
+    <div class="outer-div list-info" id={{emp.id}} *ngIf="emp.state === 'creates' || emp.state === 'accepted' || emp.state === 'rejected'">
+        <div class="employeeList">
+            <div class="empLst-st-id">
+                <P [ngClass]="{statusNew: emp.state === 'creates',statusAcc: emp.state === 'accepted',statusRej: emp.state === 'rejected'}"></P>
+                <div class="cust-Id">
+                    <span class="pHeader">رقم الطلب:</span>
+                    <p>{{emp.custodyId}}</p>
+                </div>
+                <div class="cust-date">
+                    <span class="pHeader">تاريخ الطلب:</span>
+                    <p>{{emp.custodyDate}}</p>
+                </div>
+                <div class="cust-proName">
+                    <span class="pHeader">المشروع:</span>
+                    <p>{{emp.projectName}}</p>
+                </div>
+            </div>
+<!--routerLink="/employee/employee-status"-->
+            <div class="empLst-oth" *ngIf="emp.state === 'creates' ">
+                <button class="acc-button" (click)="onAccept(emp.id)"> <fa-icon [icon]="faCircleCheck"></fa-icon>قبول</button>  
+                <!--<button class="rej-btn"> <fa-icon [icon]="faCircleXmark"></fa-icon>رفض</button>-->
+                <button type="button" class="rej-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <fa-icon [icon]="faCircleXmark"></fa-icon>رفض
+                  </button>
+                  
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title" id="exampleModalLabel">سبب الرفض:</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <textarea rows="4" cols="50" placeholder="سبب الرفض..."></textarea>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                          <button type="button" class="btn btn-primary" (click)="onReject(emp.id)" data-bs-dismiss="modal">حفظ</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+            </div>
+        </div>
+        
+        <div *ngIf="emp.visibility" style="padding-right: 5px;">
+            <div class="more-details">
+                <div>
+                    <p class="pHeader">رقم التحويلة:</p>
+                    <p>{{emp.extentionNum}}</p>
+                </div>
+                <div class="cust-phoneNum">
+                    <p class="pHeader">رقم الجوال:</p>
+                    <p>{{emp.phoneNum}}</p>
+                </div> 
+                <div class="cust-purpose">
+                    <p class="pHeader">الغرض من العهدة:</p>
+                    <p>{{emp.purpose}}</p>
+                </div>
+                <div class="cust-proName">
+                    <p class="pHeader">المرفقات:</p>
+                    <p>{{emp.attachment}}</p>
+                    
+                    
+                    
+                </div>
+            </div>
+            <div>
+                <div>
+                    <p class="pHeader">عناصر الصرف:</p>
+                    <div class="cost-component">
+                        <div>
+                            <span class="pHeader">الوصف:</span>
+                            <span style="font-size: 14px;padding-right: 5px;">{{emp.arr[0]}}</span>
+                        </div>
+                        <div>
+                            <span class="pHeader">المبلغ:</span>
+                            <span style="font-size: 14px;padding-right: 5px;">200SR</span>
+                        </div>
+                        
+                    </div>
+                    <div class="cost-component">
+                        <div>
+                            <span class="pHeader">الوصف:</span>
+                            <span style="font-size: 14px;padding-right: 5px;">desc1</span>
+                        </div>
+                        <div>
+                            <span class="pHeader">المبلغ:</span>
+                            <span style="font-size: 14px;padding-right: 5px;">200SR</span>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem;display: flex;gap: 5px;align-items: center;">
+                    <p class="pHeader" style="font-weight: bold;">المبلغ كامل:</p>
+                    <p style="font-size: 14px;">{{emp.cost}}SR</p>
+                </div>
+            </div>
+            
+            
+          
+            <div style="margin-top: 5px;">
+                <p style="font-weight: bold;">حالة الطلب:</p>
+                <span *ngIf="emp.state == 'creates'">طلب جديد</span>
+                <span *ngIf="emp.state == 'accepted'">طلب مقبول</span>
+                <span *ngIf="emp.state == 'rejected'">طلب مرفوض</span>
+            </div>
+            
+            
+            
+        </div>
+        <div style="text-align: center;font-size: 11px;" (click)="emp.visibility=!emp.visibility" (click)="next()">        
+            <div style="width: fit-content;margin: auto;cursor: pointer;">
+                <p *ngIf="emp.visibility===false">عرض تفاصيل اكثر
+                    <fa-icon [icon]="faAngleDown"></fa-icon>
+                </p>
+                <p *ngIf="emp.visibility===true">عرض تفاصيل أقل
+                    <fa-icon [icon]="faAngleUp"></fa-icon>
+                </p>
+            </div>
+            
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,100 @@
+#project{
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    border-color: #ced4da;
+    outline: none;
+    padding:0 10px;
+}
+#project:focus{
+    border-color: #91befe;
+    box-shadow: 0 0 0px 4px #c2dbfe;
+}
+.add{
+    background-color: white;
+    border: none;
+}
+.add fa-icon{
+    color: #183153;
+    font-size: 25px;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}
+th{
+    background-color: #fdfdfd;
+}
+tr, th ,td {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px 20px;
+    color: #183153;
+    font-size: 14px;
+}
+.buttons{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 40px;
+}
+.acc-btn,.rej-btn, .delete-btn{
+    width: 150px;
+    height: 35px;
+    position: relative;
+}
+.acc-btn::before,.rej-btn::before{
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    border-radius: 5px;
+    background-color: #ffffff75;
+    top: 50%;
+    left: 50%;
+}
+.delete-btn::before{
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    border-radius: 5px;
+    background-color: #18315382;
+    top: 50%;
+    left: 50%;
+}
+.acc-btn:hover::before,.rej-btn:hover::before, .delete-btn:hover::before{
+animation: btnhover .7s;
+}
+.acc-btn{
+    border: none;  
+    background-color: #14a885;
+    color: white;
+    border-radius: 5px;
+}
+.rej-btn{
+    border: none;  
+    background-color: #ed5756;
+    color: white;
+    border-radius: 5px;
+}
+
+.delete-btn{
+    color: #183153;
+    text-decoration: none;
+    border: 2px solid #183153;
+    border-radius: 5px;
+    padding: 4px 40px;
+    text-align: center;
+}
+@keyframes btnhover {
+    100%{
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+    }
+    
+}

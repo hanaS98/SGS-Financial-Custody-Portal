@@ -1,0 +1,66 @@
+
+.newReq-btn{
+    color: #183153;
+    font-size: 22px;
+    position: relative;
+    cursor: pointer;
+}
+a{
+    text-decoration: none;
+    color: #183153;
+}
+.newReq-btn::after{
+    position: absolute;
+    content: "طلب جديد";
+    width: 70px;
+    font-size: 11px;
+    background-color: #adadad;
+    padding: 5px 10px;
+    border-radius: 5px;
+    z-index: 1;
+    bottom: -30px;
+    right: 0;
+    color: white;
+    opacity: 0;
+    transition: .3s;
+}
+.newReq-btn:hover::after{
+    opacity: 1;
+}
+#k{
+    display: none;
+}
+.warning-box{
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    color: white;
+    background-color: #ffc107;
+    box-shadow: 0 0 20px 0 #ffc107;
+}
+.modal-header{
+    flex-direction: column;
+    border-bottom: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 10px;
+}
+.btn-close{
+    margin: 10px 15px 0;
+    border: none;
+    width: fit-content;
+}
+.modal-title.fs-5{
+    margin-top: 30px;
+    color: black;
+}
+.modal-body{
+    color: #8c8c8c;
+    text-align: center;
+    padding: 0 0 50px;
+    font-size: 14px;
+}

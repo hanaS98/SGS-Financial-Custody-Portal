@@ -1,0 +1,67 @@
+<div class="print-header">
+    <img src=".\assets\SgsLogo.png">
+    <p>مستند طلب عهدة</p>
+</div>
+
+<div style="margin: 40px 13px 20px;display: flex;justify-content: flex-end;">
+    <button class="print-btn" desc="طباعة" 
+    styleSheetFile="./print.component.css"
+    (click)="printInvoice()"><fa-icon [icon]="faPrint"></fa-icon></button>
+</div>
+
+<div style="margin: 0 13px 20px;">
+    <div style="display: flex;justify-content: space-between;">
+        <!--<p class="invoice-header">بيانات صاحب الطلب:</p>-->
+        <div class="invoice-content">رقم التحويلة الداخلية:<span>1111</span></div>
+        <div class="invoice-content">رقم الجوال:<span>0511111111</span></div>
+        
+</div>
+<hr>
+    <div style="display: flex;justify-content: space-between;">
+        
+        <div style="display: flex;gap: 150px;">
+            
+            <div>
+                <p class="invoice-header">بيانات الطلب</p>
+                <div class="invoice-content">المشروع:<span>project Name</span></div>
+                <div class="invoice-content">الغرض من العهدة:<span>custody purpose</span></div>
+                <div class="invoice-content">المرفقات: <span>file.txt</span></div>
+                <div class="invoice-content">الرئيس المباشر:<span>الرئيس المباشر</span></div>
+            </div>
+            <div>
+                <div>
+                    <p class="invoice-header">رقم العهدة</p>
+                    <p class="invoice-content">0000000</p>
+                </div>
+                <div>
+                    <p class="invoice-header">تاريخ انشاء العهدة</p>
+                    <p class="invoice-content">DD/MM/YYYY</p>
+                </div>
+            </div>
+        </div>
+        
+        <div>
+            <p class="invoice-header">المبلغ كامل</p>
+            <p style="font-size: 25px">20000SAR</p>
+        </div>
+    </div>
+    <hr>
+    
+    
+    <div style="display: flex;justify-content: space-between;">
+        <p class="invoice-header">الوصف</p>
+        <p class="invoice-header"> المبلغ </p>
+    </div>
+    <div style="display: flex;justify-content: space-between;">
+        <p class="invoice-content">الوصف</p>
+        <p class="invoice-content">200SAR</p>
+    </div>
+    <div style="display: flex;justify-content: space-between;">
+        <p class="invoice-content">الوصف</p>
+        <p class="invoice-content">300SAR</p>
+    </div>
+    <div style="display: flex;justify-content: space-between;">
+        <p class="invoice-content">الوصف</p>
+        <p class="invoice-content">400SAR</p>
+    </div>
+</div>

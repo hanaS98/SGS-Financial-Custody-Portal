@@ -1,0 +1,17 @@
+.footer-container{
+    background-color: #183153;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: auto;
+    width: 100%;
+}
+.footer-container p{
+    margin: 0;
+    padding: 0;
+}
+@media print{
+    .footer-container{
+        display: none;
+    }
+}

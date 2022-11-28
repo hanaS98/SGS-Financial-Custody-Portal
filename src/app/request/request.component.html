@@ -1,0 +1,196 @@
+<div class="header">
+    <h4 style="margin-bottom: 0;">طلب جديد</h4>
+    <ul>
+        <li><a  routerLink="../../employee">طلبات الموظف</a></li>
+        <li><fa-icon [icon]="faAngleLeft"></fa-icon></li>
+        <li>طلب جديد</li>
+    </ul>
+    
+</div>
+<div class="request-container">
+    
+    <!--#employeeRequest="ngForm" (ngSubmit)="onCustodyCreate(employeeRequest.value)"-->
+    
+    <div>
+        <app-tracking [currentstate]="getstate()"></app-tracking>
+        <form id="first-page" style="margin-bottom: 40px;" [formGroup]="genralInfoForm" (ngSubmit)="onGeneralCreate(genralInfoForm.value)">
+            <div class="mb-3">
+                <label for="project" class="form-label">المشروع:</label>
+                <select id="project" formControlName="Project" (change)="onSelected(Project)" [(ngModel)]="Project">
+                    <option value="empty" disabled [selected]="isSelected">لايوجد مشروع</option>
+                    <ng-container *ngFor = "let p of projectList">
+                        <option>{{p.projectName}}</option>
+                    </ng-container>
+                    <!--
+                        
+                    <option>تجربة</option>
+                    <option>تجربة</option>
+                    <option>تجربة</option>
+                    -->
+                    
+                </select>
+                <div>
+                    <small *ngIf="genralInfoForm.get('Project').errors?.['required'] && genralInfoForm.get('Project').touched">*مطلوب تعبئة هذه الخانة</small>
+                    <small id="projectSmall" *ngIf="!genralInfoForm.get('Project').touched">*مطلوب تعبئة هذه الخانة</small>
+                </div>
+                <div id="projectManger" class="form-text" style="color: #5c646b;">رئيس المشروع: <span style="color: #969696;">{{projectLeaderName}}</span></div>
+            </div>
+    
+            <div class="mb-3">
+                <label for="purpose" class="form-label">الغرض من العهدة:</label>
+                <textarea id="purpose" formControlName="purpose" class="form-control" placeholder="الغرض من العهدة" rows="3" [(ngModel)]="purpose"></textarea>
+                <!--<div>
+                    <small *ngIf="genralInfoForm.get('purpose').errors?.['required'] && genralInfoForm.get('purpose').touched">*مطلوب تعبئة هذه الخانة</small>
+                </div>-->
+            </div>
+            
+            <div class="row g-1" style="margin-top: 10px;">
+                <label for="contact-info" class="form-label">معلومات الإتصال:</label>
+                <div class="col-md">
+                    <input type="text" class="form-control" id="idNum" formControlName="idNum" placeholder="رقم التحويلة الداخلية" [(ngModel)]="idNum">
+                    <div>
+                        <small id="extentionSmall" *ngIf="!genralInfoForm.get('idNum').touched">*مطلوب تعبئة هذه الخانة</small>
+                        <small *ngIf="genralInfoForm.get('idNum').errors?.['required'] && genralInfoForm.get('idNum').touched">*مطلوب تعبئة هذه الخانة</small>
+                        <small *ngIf="genralInfoForm.get('idNum').errors?.['pattern']">*يرجى ادخال رقم مكون من اربع خانات</small>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <input type="text" class="form-control" id="phoneNum" formControlName="phoneNum" placeholder="رقم الجوال" [(ngModel)]="phoneNum">
+                    <div>
+                        <small id="phoneSmall" *ngIf="!genralInfoForm.get('phoneNum').touched">*مطلوب تعبئة هذه الخانة</small>
+                        <small *ngIf="genralInfoForm.get('phoneNum').errors?.['required'] && genralInfoForm.get('phoneNum').touched">*مطلوب تعبئة هذه الخانة</small>
+                        <small *ngIf="genralInfoForm.get('phoneNum').errors?.['maxLength']">*يجب أن يكون الرقم مكون من 10 خانات</small>
+                        <small *ngIf="genralInfoForm.get('phoneNum').errors?.['pattern']">*يرجى إدخال الرقم على الصيغة التالية:0511111111</small>
+                    </div>
+                </div>              
+            </div>
+    
+            <div class="mb-3" style="margin-top: 20px;">
+                <label for="manger" class="form-label">الرئيس المباشر:</label>
+                <input class="form-control" type="text" value={{bossName}} aria-label="Disabled input example" disabled readonly id="manger">
+                <div id="directManger" class="form-text" style="color: #5c646b;">المسمى الوظيفي: <span style="color: #969696;">{{bossPositiong}}</span></div>
+            </div>
+
+            <div class="form-btn">
+                <p id="prevbtn" (click)="prev()">السابق</p>
+                <input type="submit"  value="التالي" id="nextbtn" (click)="next()">
+            </div>
+
+        </form>
+        
+        <form  id="second-page" style="margin-bottom: 40px;" [formGroup]="custodyDescription" (ngSubmit)="onCustodyDescriptionCreate(custodyDescription.value)">
+            <div class="row g-1">
+                <label for="contact-info" class="form-label">عناصر الصرف:</label>
+                <div class="col-md">
+                    <input type="text" class="form-control" id="desc" formControlName="desc" placeholder="الوصف" [(ngModel)]="desc">
+                    <!--
+<div>
+                        <small *ngIf="reactiveForm.get('desc').errors?.['required'] && reactiveForm.get('desc').touched">*مطلوب تعبئة هذه الخانة</small>
+                    </div>
+                    -->
+                    
+                </div>
+                <div class="col-md">
+                    <input type="text" class="form-control" id="cost" formControlName="cost" placeholder="المبلغ" [(ngModel)]="cost">
+                    <!--
+                        <div>
+                        <small *ngIf="reactiveForm.get('cost').errors?.['required'] && reactiveForm.get('cost').touched">*مطلوب تعبئة هذه الخانة</small>
+                    </div>
+                    -->
+                    
+                </div>    
+                 
+                  
+                <input class="add" type="button" value="+" (click)="AddNewAttachment()">          
+            </div>
+            
+            <div class="mb-3">
+                <table>
+                    <tr>
+                        <th>#</th>
+                        <th>الوصف</th>
+                        <th>المبلغ</th>
+                        <th>حذف</th>
+                    </tr>
+                    <tr *ngFor = "let k of att; let i = index" id="{{i}}">
+                        <td>{{i+1}}</td>
+                        <td>{{k.desc}}</td>
+                        <td>{{k.cost}}</td>
+                        <td><button class="delete-button" describtion="حذف" data-bs-toggle="modal" data-bs-target="#exampleModal"><fa-icon [icon]="faTrash"></fa-icon></button>              
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <div class="modal-header">           
+                                            <fa-icon [icon]="faTrashCan" class="confirm-delete-icon"></fa-icon>
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">هل تريد حذف الطلب؟</h1>
+                                        </div>
+                                        <div class="modal-body">
+                                            عند اختيارك "نعم" سيتم حذف العنصر بشكل نهائي 
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn confirm-btn close" data-bs-dismiss="modal">لا</button>
+                                            <button type="button" class="btn confirm-btn save" (click)="DeleteItem(i)" data-bs-dismiss="modal">نعم</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div></td>
+                        <!--<td colspan="5">لايوجد</td>-->                  
+                    </tr>
+                </table>
+            </div>
+
+            <div class="form-btn">
+                <p id="prevbtn" (click)="prev()">السابق</p>
+                <input type="submit"  value="التالي" id="nextbtn" (click)="next()">
+            </div>
+
+        </form>
+
+        <form id="third-page" style="margin-bottom: 40px;"  [formGroup]="custodyAttatchment" (ngSubmit)="onCustodyAttachementCreate(custodyAttatchment.value)">
+            <div class="col-md" style="padding-bottom: 110px;">
+                <label for="contact-info" class="form-label">المرفقات:</label>
+                <input class="form-control" type="file" id="attachment" formControlName="attachment" [(ngModel)]="attachment">
+            </div> 
+            <div class="form-btn">
+                <p id="prevbtn" (click)="prev()">السابق</p>
+                <input type="submit"  value="التالي" id="nextbtn" (click)="next()">
+            </div>
+        </form>
+
+        <form id="last-page" style="margin-bottom: 40px;" [formGroup]="reactiveForm" (ngSubmit)="onCustodyCreate(reactiveForm.value)">
+            
+           <app-invoice></app-invoice>
+
+            <div class="form-btn">
+                <p id="prevbtn" (click)="prev()">السابق</p>
+                <input id="subbtn" type="submit" value="رفع الطلب" (click)="sucessfullMSG()">
+            </div>
+
+        </form>
+        <!--
+<div class="form-btn">
+            <p id="prevbtn" (click)="prev()">السابق</p>
+            <p id="nextbtn" (click)="next()">التالي</p>
+            <input id="subbtn" type="submit" value="رفع الطلب">
+            
+            
+        </div>
+        -->
+        
+         <!--
+<div class="buttons">
+            <input type="submit" class="save-btn" value="حفظ">
+            <a class="delete-btn" routerLink="../../employee">إلغاء</a>            
+        </div>
+         -->
+        
+         <div class="my-alert-btn">
+            <fa-icon class="faCheck-btn" [icon]="faCheck"></fa-icon>
+            <p>تم رفع الطلب بنجاح</p>
+        </div>
+
+    </div>
+</div>
+
+

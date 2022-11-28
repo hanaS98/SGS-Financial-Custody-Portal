@@ -1,0 +1,44 @@
+
+<div class="header-container">
+    <div class="container">
+        <div class="header-content">
+            <img src=".\assets\SgsLogoV2.png">
+            <div class="regular-list">
+                <ul class="regular-list-items">
+                    <li><a routerLink="employee">الموظفين</a></li>
+                    <li><a routerLink="leaders">المرؤوسين</a></li>
+                    <li><a routerLink="../employee/request">طلب عهدة جديد</a></li>
+                    <!--<div class="lang">
+                        <fa-icon [icon]="faEarthAsia"></fa-icon>
+                        En
+                    </div>
+                    <div >
+                        <fa-icon class="color-blind" [icon]="faEyeSlash"></fa-icon>
+                    </div>-->
+                    <div class="user"> 
+                        <span username="User Name">User Name</span>
+                        <fa-icon [icon]="faUser"></fa-icon>
+                    </div>       
+                </ul>
+            </div>
+            <div class="menu-list">
+                <button class="nav-bar" (click)="displayNavList()">
+                    <fa-icon [icon]="faBars"></fa-icon>
+                </button>
+                <ul class="menu-list-items" *ngIf="showNavList">
+                    <li><a routerLink="employee">الموظفين</a></li>
+                    <li><a routerLink="leaders">المرؤوسين</a></li>
+                    <li><a routerLink="../employee/request">طلب عهدة جديد</a></li>
+                    <div class="user"> 
+                        <span username="User Name">User Name</span>
+                        <fa-icon [icon]="faUser"></fa-icon>
+                    </div>       
+                </ul>
+            </div>
+                     
+        </div>
+        
+    </div>
+</div>
+
+

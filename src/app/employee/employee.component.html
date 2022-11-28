@@ -1,0 +1,37 @@
+<h4 style="margin-bottom: 50px;">طلبات الموظف</h4>
+<div class="employee-container">
+    
+    <div class="list">      
+        
+        <div class="req-status">
+            <label for="all">جميع الطلبات</label>
+            <input id="all" type="radio" name="filter" value="all" [(ngModel)]="filterText" (change)="onFilterSelected()">
+            <label for="craeted">الطلبات الجديدة</label>
+            <input id="craeted" type="radio" name="filter" value="craeted" [(ngModel)]="filterText" (change)="onFilterSelected()">
+            <label for="accepted">الطلبات المقبولة</label>
+            <input id="accepted" type="radio" name="filter" value="accepted" [(ngModel)]="filterText" (change)="onFilterSelected()">
+            <label for="pending">طلبات قيد الإنتظار</label>
+            <input id="pending" type="radio" name="filter" value="pending" [(ngModel)]="filterText" (change)="onFilterSelected()">
+            <label for="rejected">الطلبات المرفوضة</label>
+            <input id="rejected" type="radio" name="filter" value="rejected" [(ngModel)]="filterText" (change)="onFilterSelected()">
+            <!--
+                <p class="active" name="hana" ng-bind='filterText' (input)="onFilterSelected()">جميع الطلبات</p>
+            <p value="hi" ng-bind='filterText' (click)="onFilterSelected()">الطلبات الجديدة</p>
+            <p>الطلبات المقبولة</p>
+            <p>طلبات قيد الإنتظار</p>
+            <p>الطلبات المرفوضة</p>
+            -->
+            
+            
+        </div>
+        <app-employee-requests-filter (id)="filterdTextMethod($event)"></app-employee-requests-filter>
+        <!--<button>{{filterdTextValue}}</button>-->
+        <div style="display:flex;justify-content:space-between;align-items: center;margin: 30px 0 5px;">
+            <app-employee-request-btn></app-employee-request-btn>
+            <app-employee-request-status></app-employee-request-status>
+        </div>
+        
+        <app-employee-requests-list [filterText] = "filterdTextValue"></app-employee-requests-list>
+    </div>
+</div>
+

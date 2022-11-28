@@ -1,0 +1,55 @@
+<form>
+    <div class="mb-3">
+        <label for="project" class="form-label">المشروع:</label>
+        <select id="project" name="Project" >
+            <option value="" disabled selected>لايوجد مشروع</option>
+            <option>تجربة</option>
+            <option>تجربة</option>
+            <option>تجربة</option>
+        </select>
+        <div id="projectManger" class="form-text">رئيس المشروع: <span>علي محمد</span></div>
+    </div>
+
+    <div class="mb-3">
+        <label for="purpose" class="form-label">الغرض من العهدة:</label>
+        <textarea id="purpose" name="purpose" class="form-control" disabled readonly value="الغرض من العهدة" rows="3" ></textarea>
+    </div>
+
+    <div class="row g-1" style="margin-top: 10px;">
+        <label for="contact-info" class="form-label">معلومات الإتصال:</label>
+        <div class="col-md">
+            <input type="text" class="form-control" id="idNum" name="idNum" disabled readonly value="رقم التحويلة الداخلية">
+        </div>
+        <div class="col-md">
+            <input type="text" class="form-control" id="phoneNum" name="phoneNum" disabled readonly value="رقم الجوال">
+        </div>              
+    </div>
+
+    <div class="mb-3" style="margin-top: 20px;">
+        <label for="manger" class="form-label">الرئيس المباشر:</label>
+        <input class="form-control" type="text" value="اسم الرئيس المباشر" aria-label="Disabled input example" disabled readonly id="manger">
+        <div id="directManger" class="form-text"><span>المسمى الوظيفي</span></div>
+    </div>
+    <div class="mb-3" style="margin-top: 10px;">
+        <label for="contact-info" class="form-label">عناصر الصرف:</label>
+        <table>
+            <tr>
+                <th>#</th>
+                <th>الوصف</th>
+                <th>المبلغ</th>
+                <th>المرفقات</th>
+                <th>حذف</th>
+            </tr>
+            <tr>
+                <td colspan="5">لايوجد</td>                    
+            </tr>
+        </table>
+    </div>
+    <div class="buttons">
+        <button type="submit" class="acc-btn">قبول</button>
+        <button type="submit" class="rej-btn">رفض</button>
+        <a class="delete-btn" routerLink="../../leaders">إلغاء</a>            
+    </div>
+    
+
+</form>

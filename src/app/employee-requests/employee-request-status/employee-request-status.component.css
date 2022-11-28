@@ -1,0 +1,73 @@
+.status-div{
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+.RequestColor{
+    position: relative;
+    margin-right: 17px;
+    font-size: 12px;
+}
+.RequestColor.New{
+    color:#2C9DCE;
+}
+.RequestColor.Waiting{
+    color: #ffc107; 
+}
+.RequestColor.Rejected{
+    color: #f44336; 
+}
+.RequestColor.Accepted{
+    color: #14a885;   
+}
+.RequestColor.Incomplate{
+    color:#607d8b;
+}
+.RequestColor.Expired{
+    color: black;
+}
+.RequestColor.New::before{
+    background-color: #2C9DCE;  
+    box-shadow: 0 0 6px 0 #2C9DCE;   
+}
+.RequestColor.Waiting::before{
+    background-color: #ffc107;
+    box-shadow: 0 0 6px 0 #ffc107;  
+}
+.RequestColor.Rejected::before{
+    background-color: #f44336; 
+    box-shadow: 0 0 6px 0 #f44336;  
+}
+.RequestColor.Accepted::before{
+    background-color: #14a885;   
+    box-shadow: 0 0 6px 0 #14a885;
+}
+.RequestColor.Incomplate::before{
+    background-color: #607d8b;   
+    box-shadow: 0 0 6px 0 #607d8b;
+}
+.RequestColor.Expired::before{
+    background-color: black;   
+    box-shadow: 0 0 6px 0 black;
+}
+.RequestColor.New::before, .RequestColor.Waiting::before,
+.RequestColor.Rejected::before, .RequestColor.Accepted::before,
+.RequestColor.Incomplate::before,.RequestColor.Expired::before{
+    border-radius: 50%;
+    position: absolute;
+    content: "";
+    width: 8px;
+    height: 8px;
+    right: -14px;
+    bottom: 4px;
+    
+}
+.first, .second{
+    display: flex;
+    align-items: center;
+}
+@media (max-width: 700px){
+    .first, .second{
+        flex-direction: column;
+    }
+}

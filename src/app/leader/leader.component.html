@@ -1,0 +1,25 @@
+<h4 style="margin-bottom: 50px;">المرؤوسين</h4>
+<div class="employee-container">
+    
+    <div class="list">      
+        
+        <div class="req-status">
+            <label for="all">جميع الطلبات</label>
+            <input id="all" type="radio" name="filter" value="all">
+            <label for="craeted">الطلبات الجديدة</label>
+            <input id="craeted" type="radio" name="filter" value="craeted">
+            <label for="accepted">الطلبات المقبولة</label>
+            <input id="accepted" type="radio" name="filter" value="accepted">
+            <label for="rejected">الطلبات المرفوضة</label>
+            <input id="rejected" type="radio" name="filter" value="rejected">
+        </div>
+        <app-leader-request-filter></app-leader-request-filter>
+        <div>            
+            <app-leader-request-status></app-leader-request-status>
+        </div>        
+        <app-requests-list></app-requests-list>
+    </div>
+</div>
+
+
+

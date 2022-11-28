@@ -1,0 +1,17 @@
+<div class="search-form">
+    <form>
+        <div class="form-box">
+            <div class="search-box">                    
+                <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
+                <input type="text" placeholder="ابحث بـ رقم الطلب أو اسم المشروع..." name="searchbar" [(ngModel)]="filterdTextModel">
+            </div>
+            <div class="date-box">
+                <span style="padding-left: 5px;">من تاريخ:</span>
+                <input type="date">
+                <span style="padding-right: 10px;padding-left: 5px;">إلى تاريخ:</span>
+                <input type="date">   
+            </div> 
+        </div>         
+        <button (click)="showFilterText()">بحث </button>           
+    </form>    
+</div>

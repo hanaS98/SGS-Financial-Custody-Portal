@@ -1,0 +1,48 @@
+div{
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+.RequestColor{
+    position: relative;
+    margin: 30px 17px 5px 0;
+    font-size: 12px;
+}
+.RequestColor.New{
+    color:#2C9DCE;
+}
+.RequestColor.Waiting{
+    color: #ffc107; 
+}
+.RequestColor.Rejected{
+    color: #f44336; 
+}
+.RequestColor.Accepted{
+    color: #14a885;   
+}
+.RequestColor.New::before{
+    background-color: #2C9DCE;  
+    box-shadow: 0 0 6px 0 #2C9DCE;   
+}
+.RequestColor.Waiting::before{
+    background-color: #ffc107;
+    box-shadow: 0 0 6px 0 #ffc107;  
+}
+.RequestColor.Rejected::before{
+    background-color: #f44336; 
+    box-shadow: 0 0 6px 0 #f44336;  
+}
+.RequestColor.Accepted::before{
+    background-color: #14a885;   
+    box-shadow: 0 0 6px 0 #14a885;
+}
+.RequestColor.New::before, .RequestColor.Waiting::before, .RequestColor.Rejected::before, .RequestColor.Accepted::before{
+    border-radius: 50%;
+    position: absolute;
+    content: "";
+    width: 8px;
+    height: 8px;
+    right: -14px;
+    bottom: 4px;
+    
+}
