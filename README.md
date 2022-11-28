@@ -25,7 +25,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Link
 
-- Live Site URL: [Live Site](https://hanas98.github.io/huddle-landing-page-with-single-introductory-section-master/)
+- Live Site URL: [Live Site](https://hanas98.github.io/SGS-Financial-Custody-Portal/)
 
 ## Running unit tests
 
