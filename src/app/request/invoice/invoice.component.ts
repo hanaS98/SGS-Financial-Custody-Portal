@@ -13,7 +13,12 @@ export class InvoiceComponent implements OnInit {
   ngOnInit(): void {
   }
   printInvoice(){
-    print();
+    try {
+      // Print for Safari browser
+      document.execCommand('print', false, null)
+    } catch {
+      print();
+    }
   }
 
 }
