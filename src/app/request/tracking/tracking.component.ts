@@ -6,7 +6,7 @@ import { Component, Input, OnInit, OnChanges } from '@angular/core';
   styleUrls: ['./tracking.component.css']
 })
 export class TrackingComponent implements OnInit,OnChanges {
-  @Input() currentstate=4;
+  @Input() currentstate=1;
   constructor() { }
   
   ngOnInit(): void { 
