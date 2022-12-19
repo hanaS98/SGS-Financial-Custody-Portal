@@ -21,7 +21,7 @@
                 <select id="project" formControlName="Project" (change)="onSelected(Project)" [(ngModel)]="Project">
                     <option value="empty" disabled [selected]="isSelected">لايوجد مشروع</option>
                     <ng-container *ngFor = "let p of projectList">
-                        <option>{{p.projectName}}</option>
+                        <option value="{{p.id}}">{{p.name}}</option>
                     </ng-container>
                     <!--
                         

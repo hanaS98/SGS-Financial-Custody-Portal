@@ -1,15 +1,6 @@
-# SGS-Financial-Custody-Portal
-This project is a template for financial custody portal, and it was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.2.
+# FinancialCustodies
 
-## Table of contents
-
-- [Development server](#development-server)
-- [Code scaffolding](#code-scaffolding)
-- [Build](#build)
-- [Link](#link)
-- [Running unit tests](#running-unit-tests)
-- [Running end-to-end tests](#running-end-to-end-tests)
-- [Further help](#further-help)
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.2.
 
 ## Development server
 
@@ -22,10 +13,6 @@ Run `ng generate component component-name` to generate a new component. You can 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Link
-
-- Live Site URL: [Live Site](https://hanas98.github.io/SGS-Financial-Custody-Portal/)
 
 ## Running unit tests
 

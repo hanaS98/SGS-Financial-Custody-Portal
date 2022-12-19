@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { faSquarePlus, faAngleLeft,faTrash, faTrashCan , faCheck} from '@fortawesome/free-solid-svg-icons'
 import { project } from '../employee/model/emp';
 import { CustodyService } from '../Service/custody.service';
+import { AuthService } from '../Service/AuthService.service';
 
 
 @Component({
@@ -21,10 +22,10 @@ export class RequestComponent implements OnInit, OnChanges {
   faTrashCan=faTrashCan;
   faCheck=faCheck;
 
-  Project: any;
+  projectName: any;
   purpose: any;
-  idNum: any;
-  phoneNum: any;
+  extensionNumber: any;
+  mobileNumber: any;
   desc: any;
   cost: any;
   attachment: any;
@@ -37,24 +38,37 @@ export class RequestComponent implements OnInit, OnChanges {
   projectList:project[]=[];
   currentstate:number =1;
   projectLeaderName:string='';
-  bossName:string;
-  bossPositiong:string;
+  directManagerName:string;
+  directManagerPosition:string;
   isSelected = 'لا يوجد مشروع';
+  
+  userId:number;
+  userName:string;
+  departmentName:string;
+  projectManagerId:number;
+  directManagerId:number;
+
+tttt:{};
 
   emptyGeneralFieldChacker:boolean =false;
 
-  constructor(private http:HttpClient, private custodyService:CustodyService, private router:Router) { }
+  constructor(private http:HttpClient, private custodyService:CustodyService, private router:Router,private authService:AuthService) { }
 
   ngOnInit(): void {
     this.fetchProject();
     this.fetchBossInformation();
-   console.log(this.attachment);
+
+    this.authService.login().subscribe((ele)=>{
+      this.userName = ele.fullName;
+      this.userId = ele.userId;
+    })
+   
     this.genralInfoForm = new FormGroup(
       {
-        Project: new FormControl(null,Validators.required),
+        projectName: new FormControl(null,Validators.required),
       purpose: new FormControl(null),
-      idNum: new FormControl(null,[Validators.required,Validators.pattern('[0-9]{4}')]),
-      phoneNum: new FormControl(null,[Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern('05+[0-9]{8}')])
+      extensionNumber: new FormControl(null,[Validators.required,Validators.pattern('[0-9]{4}')]),
+      mobileNumber: new FormControl(null,[Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern('05+[0-9]{8}')])
       }
     )
     this.custodyDescription = new FormGroup(
@@ -77,22 +91,29 @@ export class RequestComponent implements OnInit, OnChanges {
   fetchProject(){
     this.custodyService.fetchProject().subscribe((emp)=>{
     this.projectList =emp;
+    
     })
        
   }
   fetchBossInformation(){
-    let userId = '1684';
-    this.custodyService.fetchBosses().subscribe((boss)=>{
-      let bossInfo = boss.find((val)=>{return val.userId === userId });
-      console.log(bossInfo);
-      this.bossName = bossInfo.bossName ;
-      this.bossPositiong = bossInfo.position;
+    this.authService.login().subscribe((ele)=>{    
+      this.custodyService.fetchBosses(ele.userId).subscribe((boss)=>{
+        
+        this.directManagerName = boss.name;
+        this.directManagerPosition = boss.managmentPosition;
+        this.directManagerId = boss.employeeId;
+        this.departmentName = boss.departmentName;
+        
+        });
     })
+    
+      
   }
   onSelected(projectvalue:string){
     this.custodyService.fetchProject().subscribe((project)=>{
-      let clickedvalue = project.find((val)=>{return val.projectName === projectvalue });
-      this.projectLeaderName = clickedvalue.projectLeader;
+      let clickedvalue = project.find((val)=>{return val.name === projectvalue });
+      this.projectLeaderName = clickedvalue.managerName;
+      this.projectManagerId = clickedvalue.managerId;
     })
   }
   /*
@@ -104,24 +125,40 @@ export class RequestComponent implements OnInit, OnChanges {
     }
   }
   */
-
-  onGeneralCreate(data:{Project:string,purpose:string,idNum:string,phoneNum:string,state:string,date:string,custId:string,pageNum:number}){
+ 
+  onGeneralCreate(data:{requestDate: string,employeeId: number,employeeName: string,employeeDepartmentName: string,purpose: string,projectCode: number,projectName: string,projectManagerId: number,projectManagerName:string,requestStatus: number,extensionNumber: string,mobileNumber: string,deletableRequest: boolean,financialCustodyTracks: {},custodyItems: {},originalDirectManagerId: number,originalDirectManagerName: string,originalDirectManagerPosition: string,projectApproval: boolean,id:string}){
+    //requestDate: string,employeeId: number,employeeName: string,employeeDepartmentName: string,purpose: string,projectCode: number,projectName: string,projectManagerId: number,projectManagerName:string,requestStatus: number,extensionNumber: string,mobileNumber: string,deletableRequest: boolean,directManagerId: number,directManagerName: string,directManagerPosition: string,originalDirectManagerId: number,originalDirectManagerName: string,originalDirectManagerPosition: string,id?:string
     if(this.emptyGeneralFieldChacker === true){
-      data.pageNum =1;
+      
+      data.employeeId = this.userId;
+      data.employeeName = this.userName;
+      data.employeeDepartmentName = this.departmentName;
+      data.projectManagerId =this.projectManagerId;
+      data.projectManagerName = this.projectLeaderName;
+      data.projectCode = 1;
+      data.requestStatus=2;
+      data.deletableRequest =false;
+      data.originalDirectManagerId=this.directManagerId;
+      data.originalDirectManagerName=this.directManagerName;
+      data.originalDirectManagerPosition=this.directManagerPosition;
+      data.financialCustodyTracks = this.financialCustodyTracks;
+      data.custodyItems=this.custodyItems;
+      console.log(data);
       this.custodyService.createGeneralInformation(data);
+      this.tttt = data;
     }
+    
   }
 
   
 
-  onCustodyDescriptionCreate(data:{arr:{},pageNum:number}){
+  onCustodyDescriptionCreate(data:{custodyItems:{}}){
     if(this.att.length === 0){
-      data.arr = "empty";
+      data.custodyItems = "empty";
     }else{
-      data.arr = this.att;
+      data.custodyItems = this.att;
     }
-    data.pageNum = 2;
-    this.custodyService.createCustodyDescription(data);
+    //this.custodyService.createCustodyDescription(data);
   }
 
   onCustodyAttachementCreate(data:{attachment:File, pageNum:number,complete:boolean}){
@@ -140,6 +177,45 @@ export class RequestComponent implements OnInit, OnChanges {
   
   att=[
     
+  ]
+  custodyItems=[
+    {
+      "id": 19,
+      "purpose": "test1",
+      "amount": 1230.00,
+      "financialCustodyId": 10
+  },
+  {
+      "id": 20,
+      "purpose": "test2",
+      "amount": 2230.00,
+      "financialCustodyId": 10
+  }
+  ]
+  financialCustodyTracks=[
+    {
+      "id": 23,
+                "date": "2022-06-22T22:26:16.8",
+                "employeeId": 1113,
+                "employeeName": "عمرو غازي جميل بخاري",
+                "position": "مدير المشروع",
+                "originalEmployeeId": 1113,
+                "originalEmployeeName": "عمرو غازي جميل بخاري",
+                "originalEmployeePosition": "مدير المشروع",
+                "approved": true,
+                "responseByEmployeeId": 1113,
+                "responseByEmployeeName": "عمرو غازي جميل بخاري",
+                "responseByEmployeePosition": "مدير ادارة الخدمات الالكترونية",
+                "responseDate": "2022-06-22T22:28:07.6933333",
+                "responseNote": "test",
+                "employeeType": 1,
+                "note": null,
+                "financialCustodyId": 10,
+                "nextManager": null,
+                "nextManagerPosition": null,
+                "nextOriginalManager": null,
+                "nextOriginalManagerPosition": null
+    }
   ]
   AddNewAttachment(){
     this.att.push({desc:this.desc,cost:this.cost});
@@ -167,11 +243,11 @@ export class RequestComponent implements OnInit, OnChanges {
     next(){
       
       if(this.currentstate == 1){
-        if(this.Project == undefined){
+        if(this.projectName == undefined){
           document.getElementById('phoneSmall').style.display="block";
-        }if(this.idNum == undefined){
+        }if(this.extensionNumber == undefined){
           document.getElementById('extentionSmall').style.display="block";
-        }if(this.phoneNum == undefined){
+        }if(this.mobileNumber == undefined){
           document.getElementById('projectSmall').style.display="block";
         }
         else{

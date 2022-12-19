@@ -4,7 +4,7 @@ import { Component, EventEmitter, OnChanges, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-
+import { AuthService } from '../Service/AuthService.service';
 import { faSquarePlus, faAngleLeft,faTrash, faTrashCan , faCheck, faRupiahSign} from '@fortawesome/free-solid-svg-icons'
 import { Employee, project } from '../employee/model/emp';
 import { CustodyService } from '../Service/custody.service';
@@ -47,7 +47,7 @@ export class EmployeeStatusComponent implements OnInit {
 
   emptyGeneralFieldChacker:boolean =false;
 
-  constructor(private http:HttpClient, private custodyService:CustodyService, private router:Router) { }
+  constructor(private http:HttpClient, private custodyService:CustodyService, private router:Router,private authService:AuthService) { }
   
   ngOnInit(): void {
     //this.costudyDate = history.state.data.custodyDate;
@@ -159,12 +159,10 @@ export class EmployeeStatusComponent implements OnInit {
     })      
   }
   fetchBossInformation(){
-    let userId = '1684';
-    this.custodyService.fetchBosses().subscribe((boss)=>{
-      let bossInfo = boss.find((val)=>{return val.userId === userId });
-      console.log(bossInfo);
-      this.bossName = bossInfo.bossName ;
-      this.bossPositiong = bossInfo.position;
+    this.authService.login().subscribe((ele)=>{    
+      this.custodyService.fetchBosses(ele.userId).subscribe((boss)=>{
+        console.log(boss);
+        });
     })
   }
   onSelected(projectvalue:string){

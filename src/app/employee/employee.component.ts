@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { faFilter, faPlusCircle, faPenToSquare, faTrash,faAngleDown,faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
 import { HttpClient } from '@angular/common/http';
@@ -10,7 +10,7 @@ import { Employee } from './model/emp';
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.css']
 })
-export class EmployeeComponent implements OnInit {
+export class EmployeeComponent implements OnInit , OnChanges{
   faFilter = faFilter;
   faPlusCircle = faPlusCircle;
   faPenToSquare=faPenToSquare;
@@ -24,10 +24,18 @@ export class EmployeeComponent implements OnInit {
   
   filterdTextValue:string;
 
+  all=false;
+  new=false;
+  processing=false;
+  uncomplete=false;
   constructor(private router:Router, private http:HttpClient) { }
 
   ngOnInit(): void {
     //this.fetchEmployee();
+    
+  }
+  ngOnChanges(){
+    
   }
   /*
   onFetchEmployee(){
@@ -69,4 +77,23 @@ export class EmployeeComponent implements OnInit {
   filterdTextMethod(text:string){
     this.filterdTextValue = text;
   }
+  
+  
+  selected(event){
+    let target = event.target || event.srcElement || event.currentTarget;
+    let idAttr = target.attributes.id;
+    let value = idAttr.nodeValue;
+    let idElement = document.getElementById(value);
+    
+    let otherEle = document.querySelectorAll('.requests');
+    otherEle.forEach((ele)=>{
+      ele.classList.remove('active');
+    })
+
+    idElement.classList.add("active");    
+    this.filterdTextValue = value;
+  }
+
+  
+  
 }

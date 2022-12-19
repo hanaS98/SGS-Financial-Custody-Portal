@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { faBars,faEarthAsia } from '@fortawesome/free-solid-svg-icons';
 import { faUser,faEyeSlash } from '@fortawesome/free-regular-svg-icons';
+
+
 
 @Component({
   selector: 'app-header',
@@ -17,9 +19,13 @@ export class HeaderComponent implements OnInit {
   showNavList =false;
   default=true;
 
-  constructor() { }
+  
 
+  constructor() { }
+  @Input() fullName:string;
   ngOnInit(): void {
+    
+   
   }
   displayNavList(){
     this.showNavList = !this.showNavList;

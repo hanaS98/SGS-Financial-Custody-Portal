@@ -16,10 +16,10 @@
         <form id="first-page" style="margin-bottom: 40px;" [formGroup]="genralInfoForm" (ngSubmit)="onGeneralCreate(genralInfoForm.value)">
             <div class="mb-3">
                 <label for="project" class="form-label">المشروع:</label>
-                <select id="project" formControlName="Project" (change)="onSelected(Project)" [(ngModel)]="Project">
+                <select id="project" formControlName="projectName" (change)="onSelected(projectName)" [(ngModel)]="projectName">
                     <option value="empty" disabled [selected]="isSelected">لايوجد مشروع</option>
                     <ng-container *ngFor = "let p of projectList">
-                        <option>{{p.projectName}}</option>
+                        <option value="{{p.name}}">{{p.name}}</option>
                     </ng-container>
                     <!--
                         
@@ -30,8 +30,8 @@
                     
                 </select>
                 <div>
-                    <small *ngIf="genralInfoForm.get('Project').errors?.['required'] && genralInfoForm.get('Project').touched">*مطلوب تعبئة هذه الخانة</small>
-                    <small id="projectSmall" *ngIf="!genralInfoForm.get('Project').touched">*مطلوب تعبئة هذه الخانة</small>
+                    <small *ngIf="genralInfoForm.get('projectName').errors?.['required'] && genralInfoForm.get('projectName').touched">*مطلوب تعبئة هذه الخانة</small>
+                    <small id="projectSmall" *ngIf="!genralInfoForm.get('projectName').touched">*مطلوب تعبئة هذه الخانة</small>
                 </div>
                 <div id="projectManger" class="form-text" style="color: #5c646b;">رئيس المشروع: <span style="color: #969696;">{{projectLeaderName}}</span></div>
             </div>
@@ -47,38 +47,42 @@
             <div class="row g-1" style="margin-top: 10px;">
                 <label for="contact-info" class="form-label">معلومات الإتصال:</label>
                 <div class="col-md">
-                    <input type="text" class="form-control" id="idNum" formControlName="idNum" placeholder="رقم التحويلة الداخلية" [(ngModel)]="idNum">
+                    <input type="text" class="form-control" id="extensionNumber" formControlName="extensionNumber" placeholder="رقم التحويلة الداخلية" [(ngModel)]="extensionNumber">
                     <div>
-                        <small id="extentionSmall" *ngIf="!genralInfoForm.get('idNum').touched">*مطلوب تعبئة هذه الخانة</small>
-                        <small *ngIf="genralInfoForm.get('idNum').errors?.['required'] && genralInfoForm.get('idNum').touched">*مطلوب تعبئة هذه الخانة</small>
-                        <small *ngIf="genralInfoForm.get('idNum').errors?.['pattern']">*يرجى ادخال رقم مكون من اربع خانات</small>
+                        <small id="extentionSmall" *ngIf="!genralInfoForm.get('extensionNumber').touched">*مطلوب تعبئة هذه الخانة</small>
+                        <small *ngIf="genralInfoForm.get('extensionNumber').errors?.['required'] && genralInfoForm.get('extensionNumber').touched">*مطلوب تعبئة هذه الخانة</small>
+                        <small *ngIf="genralInfoForm.get('extensionNumber').errors?.['pattern']">*يرجى ادخال رقم مكون من اربع خانات</small>
                     </div>
                 </div>
                 <div class="col-md">
-                    <input type="text" class="form-control" id="phoneNum" formControlName="phoneNum" placeholder="رقم الجوال" [(ngModel)]="phoneNum">
+                    <input type="text" class="form-control" id="mobileNumber" formControlName="mobileNumber" placeholder="رقم الجوال" [(ngModel)]="mobileNumber">
                     <div>
-                        <small id="phoneSmall" *ngIf="!genralInfoForm.get('phoneNum').touched">*مطلوب تعبئة هذه الخانة</small>
-                        <small *ngIf="genralInfoForm.get('phoneNum').errors?.['required'] && genralInfoForm.get('phoneNum').touched">*مطلوب تعبئة هذه الخانة</small>
-                        <small *ngIf="genralInfoForm.get('phoneNum').errors?.['maxLength']">*يجب أن يكون الرقم مكون من 10 خانات</small>
-                        <small *ngIf="genralInfoForm.get('phoneNum').errors?.['pattern']">*يرجى إدخال الرقم على الصيغة التالية:0511111111</small>
+                        <small id="phoneSmall" *ngIf="!genralInfoForm.get('mobileNumber').touched">*مطلوب تعبئة هذه الخانة</small>
+                        <small *ngIf="genralInfoForm.get('mobileNumber').errors?.['required'] && genralInfoForm.get('mobileNumber').touched">*مطلوب تعبئة هذه الخانة</small>
+                        <small *ngIf="genralInfoForm.get('mobileNumber').errors?.['maxLength']">*يجب أن يكون الرقم مكون من 10 خانات</small>
+                        <small *ngIf="genralInfoForm.get('mobileNumber').errors?.['pattern']">*يرجى إدخال الرقم على الصيغة التالية:0511111111</small>
                     </div>
                 </div>              
             </div>
     
             <div class="mb-3" style="margin-top: 20px;">
                 <label for="manger" class="form-label">الرئيس المباشر:</label>
-                <input class="form-control" type="text" value={{bossName}} aria-label="Disabled input example" disabled readonly id="manger">
-                <div id="directManger" class="form-text" style="color: #5c646b;">المسمى الوظيفي: <span style="color: #969696;">{{bossPositiong}}</span></div>
+                <input class="form-control" type="text" value={{directManagerName}} aria-label="Disabled input example" disabled readonly id="manger">
+                <div id="directManger" class="form-text" style="color: #5c646b;">المسمى الوظيفي: <span style="color: #969696;">{{directManagerPosition}}</span></div>
             </div>
 
-            <div class="form-btn" style="justify-content: flex-end" >
-                <!--<p id="prevbtn" (click)="prev()">السابق</p>-->
+            <div class="form-btn">
+                <p id="prevbtn" (click)="prev()">السابق</p>
                 <input type="submit"  value="التالي" id="nextbtn" (click)="next()">
             </div>
 
         </form>
         
         <form  id="second-page" style="margin-bottom: 40px;" [formGroup]="custodyDescription" (ngSubmit)="onCustodyDescriptionCreate(custodyDescription.value)">
+            <div>
+                
+                <pre>{{tttt |json}}</pre>
+            </div>
             <div class="row g-1">
                 <label for="contact-info" class="form-label">عناصر الصرف:</label>
                 <div class="col-md">

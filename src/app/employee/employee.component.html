@@ -4,17 +4,14 @@
     <div class="list">      
         
         <div class="req-status">
-            <label for="all">جميع الطلبات</label>
-            <!--<input id="all" type="radio" name="filter" value="all" [(ngModel)]="filterText" (change)="onFilterSelected()">-->
-            <label for="craeted">الطلبات الجديدة</label>
-            <!--<input id="craeted" type="radio" name="filter" value="craeted" [(ngModel)]="filterText" (change)="onFilterSelected()">-->
-            <label for="accepted">الطلبات المقبولة</label>
-            <!--<input id="accepted" type="radio" name="filter" value="accepted" [(ngModel)]="filterText" (change)="onFilterSelected()">-->
-            <label for="pending">طلبات قيد الإنتظار</label>
-            <!--<input id="pending" type="radio" name="filter" value="pending" [(ngModel)]="filterText" (change)="onFilterSelected()">-->
-            <label for="rejected">الطلبات المرفوضة</label>
-            <!--<input id="rejected" type="radio" name="filter" value="rejected" [(ngModel)]="filterText" (change)="onFilterSelected()">-->
+            <p id="new" class="requests active" (click)="selected($event)">الطلبات الجديدة</p>            
+            <p id="old" class="requests" (click)="selected($event)">الطالبات السابقة</p>
+            
             <!--
+                <p id="uncomplete" class="requests" (click)="selected($event)">طلبات غير مكتملة</p>
+            <p id="expired" class="requests" (click)="selected($event)">الطلبات المنتهية</p>
+            <p id="accepted" class="requests" (click)="selected($event)">الطلبات المقبولة</p>
+            <p id="rejected" class="requests" (click)="selected($event)">الطلبات المرفوضة</p>
                 <p class="active" name="hana" ng-bind='filterText' (input)="onFilterSelected()">جميع الطلبات</p>
             <p value="hi" ng-bind='filterText' (click)="onFilterSelected()">الطلبات الجديدة</p>
             <p>الطلبات المقبولة</p>

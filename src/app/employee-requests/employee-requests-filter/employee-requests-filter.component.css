@@ -75,7 +75,6 @@ button:hover{
     font-size: 14px;
     outline: none;
 }
-
 .search-box input[type='text']::placeholder{
     color:#adadad;
 }
@@ -99,13 +98,5 @@ button:hover{
     }
     .date-box input[type='date']{
         width: 100%;
-        margin-bottom: 10px;
     }
-    .search-box input[type='text']{
-        width: 80%;
-    }
-    .search-box{
-        margin-bottom: 10px;
-    }
-    
 }

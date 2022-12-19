@@ -25,7 +25,7 @@ export class EmployeeRequestsListComponent implements OnInit,OnChanges {
   @Input() filterText:string = '';
   filteredEmployee: Employee[];
 
-  defaultArr: Employee[];
+  emptyAlert:boolean = false;
 
   @ViewChild('updateForm') reactiveForm:FormGroup;
   @ViewChild('updateForm') form: NgForm;
@@ -40,7 +40,6 @@ export class EmployeeRequestsListComponent implements OnInit,OnChanges {
     
     this.filterText = value;
     this.filteredEmployee = this.getEmployeeById(value);
-    this.defaultArr = this.allEmployee;
     
   }
   
@@ -53,19 +52,91 @@ export class EmployeeRequestsListComponent implements OnInit,OnChanges {
     
   }
   ngOnChanges(){
-    if(this.filterText === undefined){
+    
+    if(this.filterText === 'all'){
+      this.fetchEmployee();
+    }
+    if(this.filterText === 'new'){
+      this.custodyService.fetchNewCustody().subscribe((emp)=>{
+        this.allEmployee =emp;   
+        if(this.allEmployee.length ==0){
+          this.emptyAlert = true;
+        }else{
+          this.emptyAlert = false;
+        }     
+      }
+      )
+      this.custodyService.fetchProcessingCustody().subscribe((emp)=>{
+        this.allEmployee =[...this.allEmployee,...emp];  
+        if(this.allEmployee.length ==0){
+          this.emptyAlert = true;
+        }else{
+          this.emptyAlert = false;
+        }      
+      }
+      ) 
+    }
+    /*
+    if(this.filterText === 'processing'){
+      this.custodyService.fetchProcessingCustody().subscribe((emp)=>{
+        this.allEmployee =emp;
+        if(this.allEmployee.length ==0){
+          this.emptyAlert = true;
+        }else{
+          this.emptyAlert = false;
+        }
+      }
+      )
+    }
+    */
+    if(this.filterText === 'old'){
       
-    }else{
-      this.FilterTextM(this.filterText);
-      
-      //this.defaultArr = this.allEmployee;
-      this.allEmployee=this.filteredEmployee;
-      
+      this.custodyService.fetchUncompleteCustody().subscribe((emp)=>{
+        this.allEmployee =emp;
+        if(this.allEmployee.length ==0){
+          this.emptyAlert = true;
+        }else{
+          this.emptyAlert = false;
+        }
+      }
+      )
+      this.custodyService.fetchExpiredCustody().subscribe((emp)=>{
+        this.allEmployee =[...this.allEmployee,...emp]; 
+        if(this.allEmployee.length ==0){
+          this.emptyAlert = true;
+        }else{
+          this.emptyAlert = false;
+        }
+      }
+      )
+      this.custodyService.fetchAcceptedCustody().subscribe((emp)=>{
+        this.allEmployee =[...this.allEmployee,...emp]; 
+        if(this.allEmployee.length ==0){
+          this.emptyAlert = true;
+        }else{
+          this.emptyAlert = false;
+        }
+      }
+      )
+      this.custodyService.fetchRejectedCustody().subscribe((emp)=>{
+        this.allEmployee =[...this.allEmployee,...emp]; 
+        if(this.allEmployee.length ==0){
+          this.emptyAlert = true;
+        }else{
+          this.emptyAlert = false;
+        }
+      }
+      )
     }
   }
   private fetchEmployee(){   
     this.custodyService.fetchCustody().subscribe((emp)=>{
       this.allEmployee =emp;
+      if(this.allEmployee.length ==0){
+        this.emptyAlert = true;
+      }else{
+        this.emptyAlert = false;
+      }
     }
     )    
   }
@@ -78,7 +149,7 @@ export class EmployeeRequestsListComponent implements OnInit,OnChanges {
   
   getEmployeeById(filteredId:string){     
     return this.allEmployee.filter((employee)=>{
-      return employee.custodyId ===filteredId;
+      //return employee.custodyId ===filteredId;
     })
     
   }
@@ -102,12 +173,14 @@ export class EmployeeRequestsListComponent implements OnInit,OnChanges {
   }
   
   getNewRequests(){
-    return this.allEmployee.filter(emp => emp.state === 'creates');
+   // return this.allEmployee.filter(emp => emp.state === 'creates');
   }
   @Input() tt:string = 'any';
   
   filter(){
     console.log(this.tt);
   }
+
+  
 
 }

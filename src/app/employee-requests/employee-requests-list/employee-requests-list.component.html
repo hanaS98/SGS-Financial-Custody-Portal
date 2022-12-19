@@ -2,7 +2,7 @@
 
 <div *ngFor = "let emp of filteredEmployee;">
     <p>Hello</p>
-    <p>{{emp.custodyDate}}</p>
+    <p>emp.custodyDate</p>
 </div>
 <hr>
 
@@ -11,14 +11,14 @@
     <div class="outer-div list-info" id={{emp.id}}>
         <div class="employeeList ">
             <div class="empLst-st-id">
-                <P [ngClass]="{statusNew: emp.state === 'creates',statusPen: emp.state === 'pending',statusAcc: emp.state === 'accepted',statusRej: emp.state === 'rejected',statusIncomplate: emp.state === 'Incomplate', statusExpired: emp.state === 'Expired'}"></P>
+                <P [ngClass]="{statusNew: emp.requestStatus === 2,statusPen: emp.requestStatus === 1,statusAcc: emp.requestStatus === 3,statusRej: emp.requestStatus === 4,statusIncomplate: emp.requestStatus === 5, statusExpired: emp.requestStatus === 6}"></P>
                 <div class="cust-Id">
                     <span class="pHeader">رقم الطلب:</span>
-                    <p>{{emp.custodyId}}</p>
+                    <p>{{emp.id}}</p>
                 </div>
                 <div class="cust-date">
                     <span class="pHeader">تاريخ الطلب:</span>
-                    <p>{{emp.custodyDate}}</p>
+                    <p>{{emp.requestDate}}</p>
                 </div>
                 <div class="cust-proName">
                     <span class="pHeader">المشروع:</span>
@@ -26,8 +26,8 @@
                 </div>
             </div>
 <!--routerLink="/employee/employee-status"-->
-            <div class="empLst-oth" *ngIf="emp.state === 'creates' || emp.state === 'pending'">
-                <button class="update-btn" describtion="تحديث" (click)="onEdit(emp.id)"><a [routerLink]="'/employee/employee-status'" [state]="{data:{custodyId: emp.custodyId,pageNum: emp.pageNum}}" ><fa-icon [icon]="faPenToSquare"></fa-icon></a></button>
+            <div class="empLst-oth" *ngIf="emp.requestStatus === 1 || emp.requestStatus === 2">
+                <button class="update-btn" describtion="تحديث" (click)="onEdit(emp.id)"><a [routerLink]="'/employee/employee-status'" [state]="{data:{custodyId: emp.id,pageNum: emp.requestStatus}}" ><fa-icon [icon]="faPenToSquare"></fa-icon></a></button>
                 <button class="delete-button" describtion="حذف" data-bs-toggle="modal" data-bs-target="#exampleModal"><fa-icon [icon]="faTrash"></fa-icon></button>              
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
@@ -50,15 +50,15 @@
             </div>
         </div>
         
-        <div *ngIf="emp.visibility" style="padding-right: 5px;">
+        <div *ngIf="emp.deletableRequest" style="padding-right: 5px;">
             <div class="more-details">
                 <div>
                     <p class="pHeader">رقم التحويلة:</p>
-                    <p>{{emp.extentionNum}}</p>
+                    <p>{{emp.extensionNumber}}</p>
                 </div>
                 <div class="cust-phoneNum">
                     <p class="pHeader">رقم الجوال:</p>
-                    <p>{{emp.phoneNum}}</p>
+                    <p>{{emp.mobileNumber}}</p>
                 </div> 
                 <div class="cust-purpose">
                     <p class="pHeader">الغرض من العهدة:</p>
@@ -66,7 +66,7 @@
                 </div>
                 <div class="cust-proName">
                     <p class="pHeader">المرفقات:</p>
-                    <p>{{emp.attachment}}</p>
+                    <p>emp.attachment</p>
                     
                     
                     
@@ -78,7 +78,7 @@
                     <div class="cost-component">
                         <div>
                             <span class="pHeader">الوصف:</span>
-                            <span style="font-size: 14px;padding-right: 5px;">{{emp.arr[0]}}</span>
+                            <span style="font-size: 14px;padding-right: 5px;">{{emp.custodyItems}}</span>
                         </div>
                         <div>
                             <span class="pHeader">المبلغ:</span>
@@ -99,7 +99,7 @@
                 </div>
                 <div style="margin-top: 1rem;display: flex;gap: 5px;align-items: center;">
                     <p class="pHeader" style="font-weight: bold;">المبلغ كامل:</p>
-                    <p style="font-size: 14px;">{{emp.cost}}SR</p>
+                    <p style="font-size: 14px;">emp.costSR</p>
                 </div>
             </div>
             
@@ -107,23 +107,23 @@
           
             <div style="margin-top: 5px;">
                 <p style="font-weight: bold;">حالة الطلب:</p>
-                <span *ngIf="emp.state == 'creates'">طلب جديد</span>
-                <span *ngIf="emp.state == 'accepted'">طلب مقبول</span>
-                <span *ngIf="emp.state == 'rejected'">طلب مرفوض</span>
-                <span *ngIf="emp.state == 'pending'">طلب تحت المعالجة</span>
-                <span *ngIf="emp.state == 'Expired'">طلب منتهي</span>
-                <span *ngIf="emp.state == 'Incomplate'">طلب غير مكتمل</span>
+                <span *ngIf="emp.requestStatus == 1">طلب جديد</span>
+                <span *ngIf="emp.requestStatus == 2">طلب مقبول</span>
+                <span *ngIf="emp.requestStatus == 3">طلب مرفوض</span>
+                <span *ngIf="emp.requestStatus == 4">طلب تحت المعالجة</span>
+                <span *ngIf="emp.requestStatus == 5">طلب منتهي</span>
+                <span *ngIf="emp.requestStatus == 6">طلب غير مكتمل</span>
             </div>
             
             
             
         </div>
-        <div style="text-align: center;font-size: 11px;" (click)="emp.visibility=!emp.visibility" (click)="next()">        
+        <div style="text-align: center;font-size: 11px;" (click)="emp.deletableRequest=!emp.deletableRequest" (click)="next()">        
             <div style="width: fit-content;margin: auto;cursor: pointer;">
-                <p *ngIf="emp.visibility===false">عرض تفاصيل اكثر
+                <p *ngIf="emp.deletableRequest===false">عرض تفاصيل اكثر
                     <fa-icon [icon]="faAngleDown"></fa-icon>
                 </p>
-                <p *ngIf="emp.visibility===true">عرض تفاصيل أقل
+                <p *ngIf="emp.deletableRequest===true">عرض تفاصيل أقل
                     <fa-icon [icon]="faAngleUp"></fa-icon>
                 </p>
             </div>
@@ -132,10 +132,9 @@
     </div>
     
 </div>
-<!--
-<div class="outer-div list-info empty-box">
+
+<div class="outer-div list-info empty-box" *ngIf="emptyAlert">
     لا يوجد طلبات عهد...
 </div>
--->
 
 

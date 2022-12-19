@@ -51,20 +51,3 @@
     font-weight: bolder;
     
 }
-.general-info{
-    display: flex;
-    justify-content: space-between;
-}
-.top-info{
-    display: flex;
-    gap: 150px;
-}
-@media (max-width:480px){
-    .general-info{
-        flex-direction: column;
-    }
-    .top-info{
-        gap: 16px;
-        flex-direction: column;
-    }
-}

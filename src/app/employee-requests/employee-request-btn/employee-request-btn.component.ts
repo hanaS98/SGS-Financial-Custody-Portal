@@ -22,6 +22,7 @@ export class EmployeeRequestBtnComponent implements OnInit {
   ngOnInit(): void {
   }
   checkHasCustody(kid:number){
+    this.router.navigate(['/employee/request']);
     this.custodyService.checkHasCustody().subscribe((emp)=>{
       
       let searchedElement = emp.find((emp)=>{return emp.userId === kid });
