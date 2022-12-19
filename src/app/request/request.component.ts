@@ -48,7 +48,6 @@ export class RequestComponent implements OnInit, OnChanges {
   projectManagerId:number;
   directManagerId:number;
 
-tttt:{};
 
   emptyGeneralFieldChacker:boolean =false;
 
@@ -145,7 +144,6 @@ tttt:{};
       data.custodyItems=this.custodyItems;
       console.log(data);
       this.custodyService.createGeneralInformation(data);
-      this.tttt = data;
     }
     
   }
